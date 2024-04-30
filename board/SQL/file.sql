@@ -9,12 +9,14 @@ CREATE TABLE `file` (
   `file_size` int NOT NULL DEFAULT '0',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `file_code` int NOT NULL DEFAULT '0',         
+  `file_code` int NOT NULL DEFAULT '0',     # 파일 종류 코드       
   PRIMARY KEY (`no`)
 ) COMMENT='파일';
 
 -- 파일 조회
 select * from file;
+
+truncate file;
 
 
 

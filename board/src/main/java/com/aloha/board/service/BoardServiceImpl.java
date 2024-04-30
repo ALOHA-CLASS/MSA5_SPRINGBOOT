@@ -74,8 +74,23 @@ public class BoardServiceImpl implements BoardService {
         // 파일 업로드
         String parentTable = "board";
         int parentNo = boardMapper.maxPk();
-        List<MultipartFile> fileList = board.getFile();
 
+        // 썸네일 업로드
+        // - 부모테이블, 부모번호, 멀티파트파일, 파일코드:1(썸네일)
+        MultipartFile thumbnailFile = board.getThumbnail();
+
+        // 썸네일 파일 업로드한 경우만
+        if( thumbnailFile != null && !thumbnailFile.isEmpty() ) {
+            Files thumbnail = new Files();
+            thumbnail.setFile(thumbnailFile);
+            thumbnail.setParentTable(parentTable);
+            thumbnail.setParentNo(parentNo);
+            thumbnail.setFileCode(1);          // 썸네일 파일 코드(1)
+            fileService.upload(thumbnail);              // 썸네일 파일 업로드
+        }
+
+        // 첨부파일 업로드
+        List<MultipartFile> fileList = board.getFile();
         if( !fileList.isEmpty() ) {
             for (MultipartFile file : fileList) {
                 if( file.isEmpty() ) continue;
