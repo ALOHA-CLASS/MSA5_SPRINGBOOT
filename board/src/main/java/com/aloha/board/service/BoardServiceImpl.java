@@ -1,19 +1,16 @@
 package com.aloha.board.service;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.board.dto.Board;
 import com.aloha.board.dto.Files;
+import com.aloha.board.dto.Option;
+import com.aloha.board.dto.Page;
 import com.aloha.board.mapper.BoardMapper;
-import com.aloha.board.mapper.FileMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,13 +29,12 @@ public class BoardServiceImpl implements BoardService {
      * 게시글 목록 조회
      */
     @Override
-    public List<Board> list() throws Exception {
-        // TODO : boardMapper 로 list() 호출
-        /*
-         *        ➡ List<Board> boardList 로 받아옴
-         *        ➡ return boardList
-         */
-        List<Board> boardList = boardMapper.list();
+    public List<Board> list(Page page, Option option) throws Exception {
+        // 게시글 데이터 개수 조회
+        int total = boardMapper.count(option);
+        page.setTotal(total);
+
+        List<Board> boardList = boardMapper.list(page, option);
         return boardList;
     }
 
@@ -49,12 +45,8 @@ public class BoardServiceImpl implements BoardService {
      */
     @Override
     public Board select(int no) throws Exception {
-        // TODO : boardMapper 로 select(no) 호출
-        /*
-         *        ➡ Board board 로 받아옴
-         *        ➡ return board
-         */
         Board board = boardMapper.select(no);
+        // boardMapper.view(no);
         return board;        
     }
 
@@ -134,6 +126,21 @@ public class BoardServiceImpl implements BoardService {
          */
         int result = boardMapper.delete(no);
         return result;
+    }
+
+    @Override
+    // public List<Board> search(String keyword) throws Exception {
+    public List<Board> search(Option option) throws Exception {
+        
+        // List<Board> boardList = boardMapper.search(keyword);
+        List<Board> boardList = boardMapper.search(option);
+        return boardList;
+    }
+
+    @Override
+    public int view(int no) throws Exception {
+        log.info(no + "번 글 조회수 증가...");
+        return boardMapper.view(no);
     }
 
 
