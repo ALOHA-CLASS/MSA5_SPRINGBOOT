@@ -1,14 +1,11 @@
-package com.aloha.board.mapper;
+package com.aloha.board.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.aloha.board.dto.Reply;
 
-@Mapper
-public interface ReplyMapper {
-    
+public interface ReplyService {
+
     // 댓글 목록
     public List<Reply> list() throws Exception;
     // ⭐댓글 목록
@@ -22,4 +19,5 @@ public interface ReplyMapper {
     public int update(Reply reply) throws Exception;
     // 댓글 삭ㅈ제
     public int delete(int no) throws Exception;
+    
 }

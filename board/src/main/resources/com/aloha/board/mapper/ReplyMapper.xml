@@ -11,6 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM reply
     </select>
 
+    <!-- ⭐댓글 목록 - [글번호] -->
+    <select id="listByBoardNo" resultType="Reply">
+        SELECT * 
+        FROM reply
+        WHERE board_no = #{boardNo}
+        ORDER BY reg_date DESC
+    </select>
+
     <!-- 댓글 조회 -->
     <select id="select" resultType="Reply">
         SELECT * 

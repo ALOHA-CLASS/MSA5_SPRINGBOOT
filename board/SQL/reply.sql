@@ -10,3 +10,20 @@ CREATE TABLE reply (
     reg_date        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   -- 등록일자
     upd_date        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP   -- 수정일자
 );
+
+
+-- 댓글 샘플 데이터
+-- 글번호 : 273
+INSERT INTO reply (board_no, parent_no, writer, content)
+VALUES ( 273, 0, '김조은', '댓글 내용1')
+      ,( 273, 0, '김조은', '댓글 내용2')
+      ,( 273, 0, '김조은', '댓글 내용3')
+      ,( 273, 0, '김조은', '댓글 내용4')
+      ,( 273, 0, '김조은', '댓글 내용5')
+;
+
+
+-- 
+SELECT *
+FROM reply
+WHERE board_no = 273;
