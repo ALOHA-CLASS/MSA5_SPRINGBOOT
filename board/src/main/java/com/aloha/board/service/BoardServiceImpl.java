@@ -24,6 +24,9 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private ReplyService replyService;
+
 
     /**
      * 게시글 목록 조회
@@ -119,12 +122,10 @@ public class BoardServiceImpl implements BoardService {
      */
     @Override
     public int delete(int no) throws Exception {
-        // TODO : boardMapper 로 delete(no) 호출
-        /*
-         *        ➡ int result 로 데이터 처리 행(개수) 받아옴
-         *        ➡ return result
-         */
         int result = boardMapper.delete(no);
+        if( result > 0 ) {
+            result += replyService.deleteByBoardNo(no);
+        }
         return result;
     }
 
