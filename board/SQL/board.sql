@@ -2,13 +2,13 @@
 DROP TABLE board;
 
 CREATE TABLE `board` (
-  `no` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `writer` varchar(100) NOT NULL,
-  `content` text,
-  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `views` int NOT NULL DEFAULT '0',
+  `no` int NOT NULL AUTO_INCREMENT COMMENT '번호',
+  `title` varchar(100) NOT NULL COMMENT '제목',
+  `writer` varchar(100) NOT NULL COMMENT '작성자',
+  `content` text COMMENT '내용',
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '수정일자',
+  `views` int NOT NULL DEFAULT '0' COMMENT '조회수',
   PRIMARY KEY (`no`)
 ) COMMENT='게시판';
 
